@@ -1,10 +1,12 @@
 package com.api.votacao.dtos;
 
 import com.api.votacao.entities.Candidato;
+import com.api.votacao.entities.Voto;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Optional;
 
 public class VotoResponse implements Serializable {
 
@@ -15,7 +17,7 @@ public class VotoResponse implements Serializable {
     private Instant dataHora;  // quando o voto foi processado
     private String mensagem;   // ex.: "Voto computado com sucesso"
 
-    public VotoResponse() {
+    public VotoResponse(Optional<Voto> byId) {
     }
 
     public VotoResponse(Long idCandidato, String nomeCandidato, Instant dataHora, String mensagem) {

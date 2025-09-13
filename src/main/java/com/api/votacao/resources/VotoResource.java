@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/voto")
+@RequestMapping(value = "/api/voto")
 public class VotoResource {
 
     @Autowired
@@ -19,6 +19,8 @@ public class VotoResource {
 
     @PostMapping
     public ResponseEntity<VotoResponse> processaVoto(@RequestBody VotoRequest request) {
-        votoService.processaVoto(request);
+        VotoResponse response = votoService.processaVoto(request);
+
+        return ResponseEntity.ok().body(response);
     }
 }
