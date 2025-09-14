@@ -8,7 +8,7 @@ CREATE TABLE voto
 (
     id              SERIAL PRIMARY KEY,
     id_candidato   BIGINT NOT NULL,
-    data_hora       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_hora       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_candidato) REFERENCES candidato (id)
 );
 

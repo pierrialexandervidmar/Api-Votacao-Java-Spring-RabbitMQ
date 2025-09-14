@@ -1,5 +1,6 @@
 package com.api.votacao.services;
 
+import com.api.votacao.dtos.CandidatoRequest;
 import com.api.votacao.dtos.CandidatoResponse;
 import com.api.votacao.entities.Candidato;
 import com.api.votacao.repositories.CandidatoRepository;
@@ -22,4 +23,8 @@ public class CandidatoService {
         return new CandidatoResponse(entity);
     }
 
+    public CandidatoResponse create(Candidato entity) {
+        CandidatoResponse candidatoResponse = new CandidatoResponse(repository.save(entity));
+        return candidatoResponse;
+    }
 }

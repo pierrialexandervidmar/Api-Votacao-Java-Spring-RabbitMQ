@@ -21,6 +21,7 @@ public class VotoService {
     @Autowired
     private VotoRepository repository;
 
+    @Autowired
     private CandidatoRepository repositoryCandidato;
 
     public VotoResponse processaVoto(VotoRequest request) {
