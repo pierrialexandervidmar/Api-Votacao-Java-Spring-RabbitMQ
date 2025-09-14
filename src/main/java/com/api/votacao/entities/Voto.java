@@ -20,6 +20,19 @@ public class Voto implements Serializable {
 
     private LocalDateTime dataHora;
 
+    public Voto() {
+    }
+
+    public Voto(Long id) {
+        this.id = id;
+    }
+
+    public Voto(Long id, Candidato candidato, LocalDateTime dataHora) {
+        this.id = id;
+        this.candidato = candidato;
+        this.dataHora = dataHora;
+    }
+
     public Long getId() {
         return id;
     }

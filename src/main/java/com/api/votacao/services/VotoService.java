@@ -3,6 +3,7 @@ package com.api.votacao.services;
 import com.api.votacao.dtos.VotoRequest;
 import com.api.votacao.dtos.VotoResponse;
 import com.api.votacao.entities.Candidato;
+import com.api.votacao.entities.Voto;
 import com.api.votacao.repositories.CandidatoRepository;
 import com.api.votacao.repositories.VotoRepository;
 import com.api.votacao.services.exceptions.ResourceNotFoundException;
@@ -24,16 +25,25 @@ public class VotoService {
     @Autowired
     private CandidatoRepository repositoryCandidato;
 
+    // Disparamos para o Rabbit e devolvemos ao front o proecesamento feito
     public VotoResponse processaVoto(VotoRequest request) {
-
         // busca se o candidato existe
         Candidato candidato = repositoryCandidato.findById(request.getIdCandidato())
                 .orElseThrow(() -> new ResourceNotFoundException("Entidade do candidato não encontrada"));
-
         // faz o processamento do voto para o rabbit
         rabbitTemplate.convertAndSend("computar-voto.ex", "", request);
-
         // responde no formato esperado
         return new VotoResponse (candidato);
     }
+
+    public void save(VotoRequest request) {
+        Candidato candidato = repositoryCandidato.findById(request.getIdCandidato())
+                .orElseThrow(() -> new ResourceNotFoundException("Candidato não encontrado"));
+
+        Voto voto = new Voto();
+        voto.setCandidato(candidato);
+        repository.save(voto);
+    }
+
+
 }

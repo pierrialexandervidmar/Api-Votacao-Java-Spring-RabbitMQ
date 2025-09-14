@@ -21,6 +21,13 @@ public class Candidato implements Serializable {
     @OneToMany(mappedBy = "candidato")
     private List<Voto> votos;
 
+    public Candidato() {
+    }
+
+    public Candidato(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
